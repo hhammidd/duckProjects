@@ -20,7 +20,6 @@ public class WhichCountriesExport {
     public void listExports(){
         List<ExporterList> countryList = new ArrayList<>();
         countryList = readList();
-
         String exportOfintrest;
         //listExporter(foodList,exportOfintrest );
     }
@@ -56,7 +55,7 @@ public class WhichCountriesExport {
                     processedRows++;
                 }
 
-                int counterBoth = listExportersTwoProducts(exporterLists,"diamonds","gold");
+                int counterBoth = listExportersTwoProducts(exporterLists,"cotton","flowers");
                 System.out.println(counterBoth);
 
                 countryInfo(exporterLists,"Nauru");
@@ -64,7 +63,6 @@ public class WhichCountriesExport {
                 //Big
                 System.out.println("big");
                 bigExporters(exporterLists, "$999,999,999,999");
-
                 System.out.println("here");
 
 
@@ -87,47 +85,36 @@ public class WhichCountriesExport {
         for (ExporterList exporterList : exporterLists){
             String currValue = exporterList.getValue();
             if(currValue.length() > money.length()){
-
                 System.out.println("Count: " + exporterList.getCountry() + ", " + exporterList.getValue() );
             }
-
         }
-
-
         }
-
     private void countryInfo(List<ExporterList> exporterLists, String nauru) {
-
 
         for (ExporterList exporterList : exporterLists){
             String currCountry = exporterList.getCountry();
-
-
             if(currCountry.contains(nauru)){
-
                 System.out.println("\n One hit: " + exporterList.getCountry() + " " + exporterList.getExports() );
-            }//end if condition
+            }
         }
     }
 
     private int listExportersTwoProducts(List<ExporterList> exporterLists, String s, String s1) {
 
         int countBoth = 0;
-        int countGold = 0;
+        int countCocoa = 0;
         for (ExporterList exporterList : exporterLists){
             String Exports = exporterList.getExports();
             if(Exports.contains(s) && Exports.contains(s1)){
-                System.out.println("Part III hit: " + countBoth + exporterList.getCountry());
+                System.out.println("Part III hit: " + countBoth + " : "+ exporterList.getCountry());
                 countBoth++;
             }
-
-
-            if (Exports.contains("gold")) {
-                countGold++;
+            if (Exports.contains("cocoa")) {
+                countCocoa++;
             }
         }
-
-        return countGold;
+        System.out.println("No Country export cocao: " + countCocoa);
+        return countCocoa;
 
     }
 }

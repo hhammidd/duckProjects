@@ -5,7 +5,7 @@ public class WeatherModel {
     private String timeEST;
     private double temperatureF;
     private String dewPointF;
-    private String humidity;
+    private double humidity;
     private String seaLevelPress;
     private String visibilityMph;
     private String windDirect;
@@ -20,7 +20,7 @@ public class WeatherModel {
     public WeatherModel() {
     }
 
-    public WeatherModel(String timeEST, double temperatureF, String dewPointF, String humidity, String seaLevelPress, String visibilityMph, String windDirect, String windSpeed, String gustSpeed, String precipitationIn, String events, String conditions, String windDirDegrees, String dateUtc) {
+    public WeatherModel(String timeEST, double temperatureF, String dewPointF, double humidity, String seaLevelPress, String visibilityMph, String windDirect, String windSpeed, String gustSpeed, String precipitationIn, String events, String conditions, String windDirDegrees, String dateUtc) {
         this.timeEST = timeEST;
         this.temperatureF = temperatureF;
         this.dewPointF = dewPointF;
@@ -61,11 +61,11 @@ public class WeatherModel {
         this.dewPointF = dewPointF;
     }
 
-    public String getHumidity() {
+    public double getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(String humidity) {
+    public void setHumidity(double humidity) {
         this.humidity = humidity;
     }
 
@@ -155,7 +155,7 @@ public class WeatherModel {
                 "timeEST='" + timeEST + '\'' +
                 ", temperatureF=" + temperatureF +
                 ", dewPointF='" + dewPointF + '\'' +
-                ", humidity='" + humidity + '\'' +
+                ", humidity=" + humidity +
                 ", seaLevelPress='" + seaLevelPress + '\'' +
                 ", visibilityMph='" + visibilityMph + '\'' +
                 ", windDirect='" + windDirect + '\'' +

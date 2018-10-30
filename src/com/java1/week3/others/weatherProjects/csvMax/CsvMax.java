@@ -7,6 +7,7 @@ import com.java1.week3.others.weatherProjects.csvMax.model.WeatherModel;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CsvMax {
 
@@ -16,32 +17,27 @@ public class CsvMax {
     }
 
     public void listExports(){
-        List<WeatherModel> countryList = new ArrayList<>();
-        List<Double> listOfhottestAllFiles = new ArrayList<>();
-        Optional<WeatherModel> minValue = null;
 
-        List<String> lstFiles = new ArrayList<String>();
-
-        String folderDesire = "2014";
+        String folderDesire = "2013";
         File file = new File("nc_weather/"+ folderDesire);
         File[] firstLevelFiles = file.listFiles();
 
         // this is a for loop on all the files
         List<Double> hottestList = new ArrayList<>();
-        List<Double> coldestList = new ArrayList<>();
-        List<Double> lowHumidityList = new ArrayList<>();
+        List<ColdestInfo> coldestList = new ArrayList<>();
+        List<LowHumidity> lowHumidityList = new ArrayList<>();
 
         double maxTemp = 0;
-        double lowestHum = 0;
 
         ColdestInfo minTemp = null;
         LowHumidity lowestHum = null;
+        List<WeatherModel> exporterLists = new ArrayList<>();
+
         for (File aFile : firstLevelFiles){
             System.out.println(aFile.getName());
             String dirFile = aFile.getAbsolutePath();
-
+            exporterLists = readFileWeather(dirFile);
             // hottestFile
-            List<WeatherModel> exporterLists = readFileWeather(dirFile);
 
             //max temp
             maxTemp = hottestHourInFile(exporterLists);
@@ -49,29 +45,52 @@ public class CsvMax {
 
             //coldestHourInFile
             minTemp = coldestHourInFile(exporterLists);
-            coldestList.add(minTemp.getColdestTemp());
+            coldestList.add(minTemp);
 
             // lowest humidity
             lowestHum = lowestHumidityInFile(exporterLists);
-            lowHumidityList.add(lowestHum.getLowHumidity());
+            lowHumidityList.add(lowestHum);
 
         }
+        // average temp
+        aveTempInFile(exporterLists);
+
+        //max temp
         double maxTempAllFile =  maxTemAllFile(hottestList);
         System.out.println(maxTempAllFile);
 
-        double minTempAllFile = minTemAllFile(coldestList);
-        System.out.println(minTempAllFile);
+        Optional<ColdestInfo> minTempAllFile = minTemAllFile(coldestList);
+        System.out.println("day: " + minTempAllFile.get().getTimeOfDay() + "and coldest : " + minTempAllFile.get().getColdestTemp());
+        System.out.println("coldest done!");
 
         // lowestHum
 
-        double lowestHumidity = lowHumAllFile(lowHumidityList);
+        Optional<LowHumidity> lowestHumidity = lowHumAllFile(lowHumidityList);
+
+        System.out.println("day: " + lowestHumidity.get().getTimeOfDay() + "and Lowest Humidity: " + lowestHumidity.get().getLowHumidity());
         System.out.println(lowestHumidity);
     }
 
-    private double lowHumAllFile(List<Double> lowHumidityList) {
-        double lowHumAll = 0;
-        lowHumAll = lowHumidityList.stream().filter(x -> x != 10000).
-                min(Double::compare).get();
+    private void aveTempInFile(List<WeatherModel> aveTemp) {
+        //double aveTemperature = 0;
+        //aveTemp = sum of the column temp
+        // filter just one list
+        List<Double> aveTemperature = aveTemp.stream().
+                map(WeatherModel::getTemperatureF).collect(Collectors.toList());
+
+        OptionalDouble averageTemp = aveTemperature
+                .stream()
+                .mapToDouble(a -> a)
+                .average();
+
+        System.out.println("Average temperature in file is" + averageTemp);
+        System.out.println("done average");
+
+    }
+
+    private Optional<LowHumidity> lowHumAllFile(List<LowHumidity> lowHumidityList) {
+        Optional<LowHumidity> lowHumAll = lowHumidityList.stream()
+                .min(Comparator.comparing(LowHumidity::getLowHumidity));
         return lowHumAll;
     }
 
@@ -89,10 +108,9 @@ public class CsvMax {
         return lh;
     }
 
-    private double minTemAllFile(List<Double> coldestHours) {
-        double coldestAll = 0;
-        coldestAll = coldestHours.stream().filter(x -> x != -9999).
-                min(Double::compare).get();
+    private Optional<ColdestInfo> minTemAllFile(List<ColdestInfo> coldestHours) {
+        Optional<ColdestInfo> coldestAll = coldestHours.stream()
+                .min(Comparator.comparing(ColdestInfo::getColdestTemp));
         return coldestAll;
     }
 
@@ -101,10 +119,12 @@ public class CsvMax {
         Optional<WeatherModel> minValue = coldestHourList.stream().min(Comparator.comparing(WeatherModel::getTemperatureF));
         coldesTemp = minValue.get().getTemperatureF();
         String coldestHour = minValue.get().getTimeEST();
+        String colddayTime = minValue.get().getDateUtc();
         ColdestInfo minValues = new ColdestInfo();
 
         minValues.setColdestTemp(coldesTemp);
         minValues.setColdestHour(coldestHour);
+        minValues.setTimeOfDay(colddayTime);
 
         return minValues;
     }
