@@ -9,8 +9,26 @@ public class WordPlay {
         String phrase = "Hello World";
         String replaceVowelsOk = replaceVowels(phrase ,'*');
 
+        String emphasizeValue = emphasize("dna ctgaaactga",'a');
+    }
 
+    private static String emphasize(String phrase, char ch) {
+        String newPhrase = "" ;
+        for (int i = 0; i<phrase.length();i++){
+            char c = phrase.charAt(i);
+            if (c == ch){
+                System.out.println("should be change");
+                if (i % 2 == 0){
+                    newPhrase += '*';
+                }else {
+                    newPhrase += '+';
+                }
+            } else {
+                newPhrase += c;
+            }
+        }
 
+        return null;
     }
 
     private static String replaceVowels(String phrase, char ch) {
@@ -23,7 +41,7 @@ public class WordPlay {
                 newPhrase += c;
             }
         }
-       return phrase;
+       return newPhrase;
     }
 
     private static boolean isVowel(char ch) {
