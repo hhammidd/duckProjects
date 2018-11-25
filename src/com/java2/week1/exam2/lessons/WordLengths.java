@@ -9,7 +9,7 @@ public class WordLengths {
     private static HashMap hm = new HashMap();
 
     public static void main(String[] args) throws IOException {
-        FileReader fr = new FileReader("java2/week1/CommonWordsData/lotsOfWords.txt");
+        FileReader fr = new FileReader("java2/week1/CommonWordsData/errors.txt");
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();
         List<String> wordsList = new ArrayList<>();
@@ -18,8 +18,9 @@ public class WordLengths {
             for (int i = 0;i<subWords.length; i++){
                 if (!(subWords[i].equals(""))){
                     wordsList.addAll(Arrays.asList(subWords));
-                    break;
+
                 }
+                break;
             }
             line = reader.readLine();
         }

@@ -1,12 +1,17 @@
 package com.java2.week1.exam2.lessons;
 
 public class CaesarCipher {
-    public boolean isEven(int n) {
+    public static boolean isEven(int n) {
         if ((n % 2) == 0) return true;
         else return false;
     }
 
-    public String encrypt(String input, int key) {
+    public static void main(String[] args) {
+        testCaesar();
+        test_encryptTwoKeys();
+    }
+
+    public static String encrypt(String input, int key) {
         //Make a StringBuilder with message (encrypted)
         StringBuilder encrypted = new StringBuilder(input);
         //Write down the alphabet
@@ -35,7 +40,7 @@ public class CaesarCipher {
         return encrypted.toString();
     }
 
-    public void testCaesar() {
+    public static void testCaesar() {
         int key = 15;
         //FileResource fr = new FileResource();
         //String message = fr.asString();
@@ -46,7 +51,7 @@ public class CaesarCipher {
         System.out.println(decrypted);
     }
 
-    public String encryptTwoKeys(String input, int key1, int key2){
+    public static String encryptTwoKeys(String input, int key1, int key2){
         String encrypt1 = encrypt(input, key1);
         String encrypt2 = encrypt(input, key2);
         StringBuilder encrypted= new StringBuilder(input);
@@ -61,10 +66,10 @@ public class CaesarCipher {
         return encrypted.toString();
     }
 
-    public void test_encryptTwoKeys(){
-        String input = "Eren and Emily have evil eerie green eyes";
-        int key1 = 22;
-        int key2 = 19;
+    public static void test_encryptTwoKeys(){
+        String input = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+        int key1 = 21;
+        int key2 = 8;
         System.out.println(input);
         System.out.println(encryptTwoKeys(input, key1, key2));
     }

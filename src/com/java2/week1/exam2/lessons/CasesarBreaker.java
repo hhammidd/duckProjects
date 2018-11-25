@@ -1,6 +1,7 @@
 package com.java2.week1.exam2.lessons;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +12,12 @@ public class CasesarBreaker {
     public static void main(String[] args) throws IOException {
         //test_countLetters();
         halfOfString("s",2);
+        test_countLetters();
+        test_decryptTwoKeys();
 
     }
 
-    public String decryptTwoKeys(String encrypted){
+    public static String decryptTwoKeys(String encrypted){
         CaesarCipher cc1 = new CaesarCipher();
         CaesarCipher cc2 = new CaesarCipher();
 
@@ -43,11 +46,17 @@ public class CasesarBreaker {
         return theAnswer.toString();
     }
 
-    public void test_decryptTwoKeys(){
-        //FileResource resource = new FileResource("data/mysteryTwoKeysPractice.txt");
-        //FileResource resource = new FileResource("data/wordsLotsOfEs.txt");
-        //String message = resource.asString();
-        String message = "Akag tjw Xibhr awoa aoee xakex znxag xwko";
+    public static void test_decryptTwoKeys() throws IOException {
+        FileReader fr = new FileReader("java2/week1/CommonWordsData/mysteryTwoKeysQuiz.txt");
+        BufferedReader reader = new BufferedReader(fr);
+        String line = reader.readLine();
+        List<String> wordsList = new ArrayList<>();
+        StringBuilder contentBuilder = new StringBuilder();
+        while ( line != null){
+            contentBuilder.append(line);
+            line = reader.readLine();
+        }
+        String message = contentBuilder.toString();
         String d_TwoKeyMessage = decryptTwoKeys(message);
 
         System.out.println(message);
@@ -60,7 +69,7 @@ public class CasesarBreaker {
         return cc1.encrypt(encrypted,(26-key));
     }
 
-    public int maxIndex(int[] values){
+    public static int maxIndex(int[] values){
         int maxLength =0;
         int indexOfMax =0;
 
@@ -73,7 +82,7 @@ public class CasesarBreaker {
         return indexOfMax;
     }
 
-    public int[] countLetters(String message){
+    public static int[] countLetters(String message){
         String alph = "abcdefghijklmnopqrstuvwxyz";
         int[] counts = new int[26];
 
@@ -140,7 +149,7 @@ public class CasesarBreaker {
         System.out.println(encrypted);
         System.out.println(decrypted);
     }
-    public int getKey(String e_message){
+    public static int getKey(String e_message){
         int[] freqs = countLetters(e_message);
         int maxDex = maxIndex(freqs);
         int dkey = maxDex-4;
