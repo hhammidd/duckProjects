@@ -1,0 +1,6 @@
+minute
+century
+decade
+hour
+month
+millennium
