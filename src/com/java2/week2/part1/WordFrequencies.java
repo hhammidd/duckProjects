@@ -16,15 +16,19 @@ public class WordFrequencies {
     private void findUnique() throws IOException {
         myWords.clear();
         myFreqs.clear();
-        FileReader fr = new FileReader("java2/week2/exam1/likeit.txt");
+        FileReader fr = new FileReader("java2/week2/exam2/errors.txt");
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();
         List<String> wordsList = new ArrayList<>();
         while ( line != null){
             String[] subWords = line.split("\\s+");
-            if (!(subWords.equals(""))) {
-                wordsList.addAll(Arrays.asList(subWords));
+
+            for (int i = 0; i<subWords.length; i++){
+                if (!(subWords[i].equals(""))) {
+                    wordsList.add(subWords[i]);
+                }
             }
+
             line = reader.readLine();
         }
         for (String word : wordsList) {
@@ -47,7 +51,7 @@ public class WordFrequencies {
             System.out.println(myWords.get(k)+": "+myFreqs.get(k)+"\t");
         }
         int biggest = findIndexOfMax();
-        System.out.println("The word with highest frequency is: "+myWords.get(biggest)+" with "+myFreqs.get(biggest));
+        System.out.println("The word with highest frequency is:--> "+myWords.get(biggest)+" <-- with "+myFreqs.get(biggest) + " Occur");
         System.out.println("The number of unique words are: "+myWords.size());
 
     }
