@@ -12,15 +12,17 @@ public class WordsInFiles {
     }
 
     private void addWordsFromFile(String name) throws IOException {
-        FileReader fr = new FileReader("java2/week2/exam2/"+name);
+        FileReader fr = new FileReader("java2/week2/exam2/finalExam/"+name);
 
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();
         List<String> wordsList = new ArrayList<>();
         while ( line != null){
             String[] subWords = line.split("\\s+");
-            if (!(subWords.equals(""))) {
-                wordsList.addAll(Arrays.asList(subWords));
+            for (int i = 0; i<subWords.length;i++){
+                if (!(subWords.equals(""))) {
+                    wordsList.add(subWords[i]);
+                }
             }
             line = reader.readLine();
         }
@@ -41,10 +43,18 @@ public class WordsInFiles {
         map.clear();
         //DirectoryResource dr = new DirectoryResource();
         List<String> dr = new ArrayList<>();
-        dr.add("brief1.txt");
-        dr.add("brief2.txt");
-        dr.add("brief3.txt");
-        dr.add("brief4.txt");
+        //dr.add("brief1.txt");
+        //dr.add("brief2.txt");
+        //dr.add("brief3.txt");
+        //dr.add("brief4.txt");
+
+        dr.add("caesar.txt");
+        dr.add("hamlet.txt");
+        dr.add("macbeth.txt");
+        dr.add("romeo.txt");
+        dr.add("confucius.txt");
+        dr.add("likeit.txt");
+        dr.add("errors.txt");
 
         for (String f: dr) {
             addWordsFromFile(f);
@@ -66,11 +76,18 @@ public class WordsInFiles {
 
     private ArrayList<String> wordsInNumFiles(int number) {
         int current = 0;
+        int counting =0;
+        System.out.println("\nThis words appear " + number + " times: ");
         ArrayList<String> list = new ArrayList<String>();
         for (String word: map.keySet()) {
             current = map.get(word).size();
-            if (current==number) list.add(word);
+            if (current==number){
+                list.add(word);
+                counting++;
+            }
+
         }
+        System.out.println("total of words repeated " + number + " times: " + counting);
         return list;
     }
 
@@ -88,7 +105,7 @@ public class WordsInFiles {
     public void test() throws IOException {
         buildWordFileMap();
         int max = maxNumber();
-        ArrayList<String> list = wordsInNumFiles(max);
+        ArrayList<String> list = wordsInNumFiles(7);
         System.out.println("The greatest number of files a word appears in is "+max+", and there are "+list.size()+ " such words: ");
         for (int k = 0; k < list.size(); k++) {
             System.out.println(list.get(k)+" ");

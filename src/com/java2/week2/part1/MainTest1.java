@@ -9,7 +9,7 @@ public class MainTest1 {
 
         System.out.println("======Assignment2+++++++");
         CharactersInPlay charactersInPlay = new CharactersInPlay();
-        charactersInPlay.testfindAllCharacters();
+        //charactersInPlay.testfindAllCharacters();
 
     }
 }

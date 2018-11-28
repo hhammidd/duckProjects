@@ -19,7 +19,8 @@ public class CodonCount {
         String current;
         while (num <= k-1) {
             current = dna.substring(num*3+start, num*3+start+3);
-            if (!map.containsKey(current)) map.put(current, 1);
+            if (!map.containsKey(current))
+                map.put(current, 1);
             else map.put(current, map.get(current)+1);
             num = num + 1;
         }
@@ -49,7 +50,7 @@ public class CodonCount {
     }
 
     public void test() throws IOException {
-        FileReader fr = new FileReader("java2/week2/exam2/smalldna.txt");
+        FileReader fr = new FileReader("java2/week2/exam2/dnaMystery2.txt");
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();
         StringBuilder contentBuilder = new StringBuilder();
@@ -61,8 +62,8 @@ public class CodonCount {
 
 
         dna = dna.toUpperCase();
-        int start = 1;
-        int end = 5;
+        int start = 0;
+        int end = 8;
 
         buildCodonMap(0, dna);
         System.out.println("Reading frame starting with 0 results in "+map.size()+" unique codons"+"\t");

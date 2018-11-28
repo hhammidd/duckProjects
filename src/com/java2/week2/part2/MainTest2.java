@@ -8,9 +8,13 @@ public class MainTest2 {
         //codonCount.test();
 
         WordsInFiles wordsInFiles = new WordsInFiles();
-        //wordsInFiles.test();
 
-        GladLibMap glm = new GladLibMap("data/GladLibData/datalong");
-        glm.makeStory();
+        wordsInFiles.test();
+
+        GladLibMap glm = new GladLibMap("");
+        //glm.makeStory();
+
+        GladLib glabLib = new GladLib();
+        //glabLib.test();
     }
 }

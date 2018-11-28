@@ -1,12 +1,12 @@
 package com.java2.week2.part2;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 public class GladLibMap {
     private HashMap<String, ArrayList<String>> wordMap;
+    private HashMap<String, ArrayList<String>> myMap;
 
     private int wordCount = 0;
     private ArrayList<String> usedWords;
@@ -92,10 +92,22 @@ public class GladLibMap {
     }
 
     public int totalWordsInMap(){
+
+
         int cnt = 0;
         for (String key : wordMap.keySet()) {
-            for (String word : wordMap.get(key)) cnt++;
+            for (String word : wordMap.get(key))
+                cnt++;
         }
+
+        int sum = 0;
+        for (String category : wordMap.keySet()) {
+            ArrayList<String> words = wordMap.get(category);
+            sum += words.size();
+        }
+        System.out.println(sum);
+        System.out.println(cnt);
+
         return cnt;
 
     }
@@ -109,7 +121,7 @@ public class GladLibMap {
 
     public void makeStory() throws IOException {
         System.out.println("\n");
-        String story = fromTemplate(source+"/madtemplate3.txt");
+        String story = fromTemplate(source+"/madtemplate.txt");
         printOut(story, 60);
         System.out.println("\nReplaced words:\t"+wordCount);
         System.out.println("Total words:\t" + totalWordsInMap());
@@ -131,7 +143,7 @@ public class GladLibMap {
 
     private String fromTemplate(String source) throws IOException {
         String story = new String();
-        FileReader fr = new FileReader("java2/week2/exam2/"+source);
+        FileReader fr = new FileReader("java2/week2/exam2/glabLib/"+source);
 
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();

@@ -27,12 +27,14 @@ public class CharactersInPlay {
     }
 
     private void findAllCharacters() throws IOException {
-        FileReader fr = new FileReader("java2/week2/exam1/likeit.txt");
+        FileReader fr = new FileReader("java2/week2/exam2/errors.txt");
         BufferedReader reader = new BufferedReader(fr);
         String lineO = reader.readLine();
         List<String> lines = new ArrayList<>();
         while ( lineO != null){
-            lines.add(lineO);
+            if (!(lineO.isEmpty())){
+                lines.add(lineO);
+            }
             lineO = reader.readLine();
         }
 

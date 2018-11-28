@@ -1,0 +1,95 @@
+1.
+Which one of the following best explains why this code still returns duplicates sometimes?
+If a word is a repeated word, then this code gets another random word and uses that second word without checking to see if it is a repeated word.
+====
+2.
+Which one of the following methods is most likely where that variable is updated?
+processWord
+===
+3.
+How many unique words are in the file errors.txt?
+NOT>3722
+3721
+====
+4.
+Which word occurs the most often in the file errors.txt?
+of
+===
+5.
+How many times does the most common word occur?
+609
+====
+6.
+What is the name of the character with the third most speaking parts in the file errors.txt?
+ADRIANA
+====
+7.
+Find the name of the character with the third most speaking parts in the file errors.txt. How many speaking parts does this person have?
+79
+====
+8.
+How many characters in the file errors.txt have at least 10 speaking parts, but no more than 15 speaking parts?
+3
+====
+9.
+How many unique codons are there if you use a reading frame that starts at position 1?
+32
+====
+10.
+What is the number of occurrences of the codon that occurs the most often using a reading frame that starts at position 2?
+12
+====
+11.
+Using a reading frame that starts at position 0, which of the following codons occur 7 times? (Select all that are correct.)
+NOT>GCC
+CAA
+CAG
+====
+12.
+How many words are there that each occur in all seven files?
+NOT>571
+
+====
+13.
+How many words are there that each occur in four of the seven files?
+826
+====
+14.
+In which file does the word “laid” NOT appear?
+caesar.txt
+====
+15. NOT
+In which of the following files does the word “tree” appear? (Choose all that apply.)
+confucius.txt
+NOT>hamlet.txt
+likeit.txt
+macbeth.txt
+romeo.txt
+====
+16.
+In which method are the individual ArrayLists of words for categories created?
+NOT>initializeFromSource
+readIt
+====
+17.
+. In which method are these individual ArrayLists of words placed into the HashMap?
+initializeFromSource
+====
+18.NOT>
+Which two of the following code possibilities compute this sum of total number of words in the variable sum?
+int sum = 0;
+for (String category : myMap.keySet()) {
+    sum += myMap.get(category).size();
+}
+NOT>
+int sum = 0;
+for (ArrayList<String> wordlist : myMap.keySet()) {
+    sum += wordlist.size();
+}
+===========
+19.
+In which method would we put a category into this ArrayList?
+processWord
+====
+
+wrongs: 11-12-15-16-18-
