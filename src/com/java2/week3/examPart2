@@ -1,0 +1,11 @@
+1.
+The method does not work because a status code is compared to a LogEntry. Instead, a for loop is needed to iterate over all the status codes of the LogEntrys in records to check to see if the statusCode is already in there. After looping, if it is not in there, then the LogEntry can be added to records.
+==
+2.
+Only 404
+==
+3.
+NOT>36
+==
+4.
+65

@@ -1,14 +1,18 @@
 package com.java2.week3;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 public class Tester {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ParseException {
         testLogEntry();
+        testLogAnalyzer();
     }
 
-    public static void testLogEntry(){
+    public static void testLogEntry() {
         LogEntry le = new LogEntry("1.2.3.4", new Date(),
                 "example req1", 200, 500);
         System.out.println(le);
@@ -18,5 +22,26 @@ public class Tester {
         System.out.println(le2);
     }
 
+    public static void testLogAnalyzer() throws IOException, ParseException {
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile("weblog1_log");
+        //int uniqueIPs = la.countUniqueIPs();
+        //System.out.println("There are " + uniqueIPs + " IPs");
+
+        //la.printAllHigherThanNum(400);
+        //System.out.println("above Q2");
+        List<String> ipOneDay = la.uniqueIPVisitsOnDay("Mar 24");
+        if (!ipOneDay.isEmpty()) {
+            System.out.println("Size of the return on Exact date: "+ipOneDay.size());
+            for (String ip : ipOneDay) {
+                System.out.println(ip);
+            }
+        } else {
+            System.out.println("there is No Ip in This Day");
+        }
+
+        //int uniqueIpInRange = la.countUniqueIPsInRange(200,299);
+        //System.out.println("unique IP In Range-->: " + uniqueIpInRange);
+    }
 
 }

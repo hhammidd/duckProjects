@@ -1,0 +1,10 @@
+1.
+records = new ArrayList<LogEntry>();
+==
+2.
+NOT>WebLogParser.parseEntry(line);
+LogEntry le = WebLogParser.parseEntry(line);
+==
+3.
+Initialize location in the constructor with the code:
+location = 0;

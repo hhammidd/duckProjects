@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CaesarCipher {
+public class CaesarCipherMe {
     public static void main(String[] args) throws IOException {
         Utils utils = new Utils();
         utils.digitTest();
-        String encryptedStr = encrypt("First Legion", 23);
+        String encryptedStr = encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15);
         testCaesar();
-        encryptTwoKeys("First Legion",23,17);
+        String key2 = encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!",8,21);
+        System.out.println("here");
     }
 
     public static String encryptTwoKeys(String input, int key1, int key2){
