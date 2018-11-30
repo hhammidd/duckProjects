@@ -24,13 +24,14 @@ public class Tester {
 
     public static void testLogAnalyzer() throws IOException, ParseException {
         LogAnalyzer la = new LogAnalyzer();
-        la.readFile("weblog1_log");
-        //int uniqueIPs = la.countUniqueIPs();
-        //System.out.println("There are " + uniqueIPs + " IPs");
+        la.readFile("weblog2_log");
+        int uniqueIPs = la.countUniqueIPs();
+        la.printAll();
+        System.out.println("There are " + uniqueIPs + " IPs");
 
         //la.printAllHigherThanNum(400);
         //System.out.println("above Q2");
-        List<String> ipOneDay = la.uniqueIPVisitsOnDay("Mar 24");
+        List<String> ipOneDay = la.uniqueIPVisitsOnDay("Sep 27");
         if (!ipOneDay.isEmpty()) {
             System.out.println("Size of the return on Exact date: "+ipOneDay.size());
             for (String ip : ipOneDay) {
@@ -40,8 +41,8 @@ public class Tester {
             System.out.println("there is No Ip in This Day");
         }
 
-        //int uniqueIpInRange = la.countUniqueIPsInRange(200,299);
-        //System.out.println("unique IP In Range-->: " + uniqueIpInRange);
+        int uniqueIpInRange = la.countUniqueIPsInRange(400,499);
+        System.out.println("unique IP In Range-->: " + uniqueIpInRange);
     }
 
 }
