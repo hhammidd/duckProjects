@@ -31,6 +31,7 @@ public class CharactersInPlay {
         BufferedReader reader = new BufferedReader(fr);
         String lineO = reader.readLine();
         List<String> lines = new ArrayList<>();
+
         while ( lineO != null){
             if (!(lineO.isEmpty())){
                 lines.add(lineO);
