@@ -12,6 +12,7 @@ public class VigenereCipher {
         }
     }
 
+
     public String encrypt(String input) {
         StringBuilder answer = new StringBuilder();
         int i = 0;
