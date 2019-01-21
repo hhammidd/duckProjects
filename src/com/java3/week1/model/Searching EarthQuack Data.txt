@@ -1,0 +1,20 @@
+
+1. between -10000.0 and -8000.0
+172
+======
+2. “Explosion” at the start
+7
+===========
+3.“California” at the end of the earthquake’s title
+538
+==========
+4.String where = "any";
+          String phrase = "Creek";
+
+9
+============
+5. third largest earthquake
+5.90
+=========
+6. fifth country is the fifth largest
+Japan

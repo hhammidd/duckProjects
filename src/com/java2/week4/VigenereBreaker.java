@@ -19,6 +19,13 @@ public class VigenereBreaker {
     public String sliceString(String message, int whichSlice, int totalSlices) {
 
         StringBuilder thisSlice = new StringBuilder();
+        int startCount = 0;
+        for (int ii = 0; ii < message.length(); ii++){
+            if (message.charAt(ii) == '*'){
+                startCount++;
+            }
+        }
+
         for(int i = whichSlice;i<message.length();i+=totalSlices){
             thisSlice.append(message.substring(i,i+1));
         }
@@ -39,7 +46,7 @@ public class VigenereBreaker {
         System.out.println(mostCommon);
         //WRITE YOUR CODE HERE
         int[] key = new int[klength];
-        CaesarCracker cc = new CaesarCracker(mostCommon);
+        CaesarCracker cc = new CaesarCracker();
 
         for (int i=0; i<klength;i++) {
             String slice = sliceString(encrypted, i, klength);
@@ -74,21 +81,28 @@ public class VigenereBreaker {
     }
 
     public void breakVigenere () throws IOException {
-        FileReader fr = new FileReader("java2/week4/athens_keyflute.txt");
+        FileReader fr = new FileReader("java2/week4/secretmessage1.txt");
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();
-        List<String> lines = new ArrayList<>();
         StringBuilder contentBuilder = new StringBuilder();
+        List<String> lines = new ArrayList<>();
         while ( line != null){
-            if (!line.equals("")) {
-                lines.add(line);
-                contentBuilder.append(line);
-                contentBuilder.append("\n");
-            }
+
+            lines.add(line);
+
+            contentBuilder.append(line);
+            contentBuilder.append("\n");
+            //contentBuilder.append(System.getProperty("line.separator"));
             line = reader.readLine();
         }
-        String encrypted = String.valueOf(lines).substring(1,String.valueOf(lines).length()-1);
-        int[] decryptKeys = tryKeyLength(encrypted,5,'e');
+        contentBuilder.setLength(contentBuilder.length() -1);
+        String encrypted =contentBuilder.toString();
+        //String encrypted = String.valueOf(lines);
+        int[] decryptKeys = tryKeyLength(encrypted,4,'e');
+        System.out.println("KeysFor Break:");
+        for (int index=0;index < decryptKeys.length;index++) {
+            System.out.println(decryptKeys[index]);
+        }
         VigenereCipher vigCipher = new VigenereCipher(decryptKeys);
         String message = vigCipher.decrypt(encrypted);
         System.out.println("This is message: " +message);

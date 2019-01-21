@@ -1,0 +1,17 @@
+1.   10,000,000 meters (10,000 km) from Tokyo, Japan whose location is (35.42, 139.43), and that are in Japan (th
+20
+=======
+2. between 4.0 and 5.0 inclusive and depth between -35,000.0 and -12,000.0
+24
+=========
+3.  -100,000.0 and -10,000.0, and if the letter “a” is in
+NOT>362
+358
+=========
+4.  Tulsa, Oklahoma at location (36.1314, -95.9372) is less than 10,000,000 meters (or 10,000 km)
+NOT>619
+616
+=============
+5. most likely NOT a needed change to the DepthFilter class?
+NOT>A parameter in the constructor to initialize the name of the filter.
+A new method setName to change the name of the filter.
