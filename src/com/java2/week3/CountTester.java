@@ -31,7 +31,7 @@ public class CountTester {
         System.out.println(dayMostIp);
 
         System.out.println("========iPsWithMostVisitsOnDay==========");
-        ArrayList<String> iPs = la.iPsWithMostVisitsOnDay(iPsForDay, "Sep 30");
+        ArrayList<String> iPs = la.iPsWithMostVisitsOnDay(iPsForDay, "Sep 29");
         System.out.println("On that day ips were" + iPs) ;
 
 

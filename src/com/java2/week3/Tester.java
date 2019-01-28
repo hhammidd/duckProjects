@@ -41,7 +41,7 @@ public class Tester {
             System.out.println("there is No Ip in This Day");
         }
 
-        int uniqueIpInRange = la.countUniqueIPsInRange(400,499);
+        int uniqueIpInRange = la.countUniqueIPsInRange(200,299);
         System.out.println("unique IP In Range-->: " + uniqueIpInRange);
     }
 

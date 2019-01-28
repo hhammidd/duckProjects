@@ -1,7 +1,6 @@
 package com.java2.week1.exam2.lessons;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +58,7 @@ public class CasesarBreaker {
         String message = contentBuilder.toString();
         String d_TwoKeyMessage = decryptTwoKeys(message);
 
+        System.out.println("hey hey");
         System.out.println(message);
         System.out.println(d_TwoKeyMessage);
     }

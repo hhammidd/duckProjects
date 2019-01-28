@@ -40,7 +40,7 @@ public class QuakeSortInPlace {
     public  ArrayList<QuakeEntry> getQuakeData(String fname) {
         EarthQuakeParser parser = new EarthQuakeParser();
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "java3/week1/data/"+fname;
+        String source = "java3/week2/data/"+fname;
         return parser.read(source);
     }
 
@@ -108,7 +108,7 @@ public class QuakeSortInPlace {
 
         //for the quiz, set i<50
         //int limit = quakeData.size();
-        int limit = 70;
+        int limit = 50;
         for (int i=0; i<limit; i++) {
             int indDeepest = getLargestDepth(quakeData, i);
             QuakeEntry currentQuakeEntry = quakeData.get(i);
@@ -123,7 +123,7 @@ public class QuakeSortInPlace {
      */
     public void testSortByLargestDepth() {
 
-        ArrayList<QuakeEntry> list  = getQuakeData("earthQuakeDataDec6sample1.xml");
+        ArrayList<QuakeEntry> list  = getQuakeData("earthQuakeDataDec6sample2.xml");
 
         System.out.println("read data for "+list.size()+" quakes");
         sortByLargestDepth(list);
@@ -224,7 +224,7 @@ public class QuakeSortInPlace {
      * Testing Assignment 3: Check for Completion
      */
     public void testSortByMagnitudeWithBubbleSortWithCheck() {
-        ArrayList<QuakeEntry> sorted1 = getQuakeData("earthQuakeDataDec6sample2.xml");
+        ArrayList<QuakeEntry> sorted1 = getQuakeData("earthQuakeDataWeekDec6sample2.xml");
 //    	ArrayList<QuakeEntry> sorted2 = getQuakeData("earthquakeDataSampleSix2.atom");
         sortByMagnitudeWithBubbleSortWithCheck(sorted1);
 //    	sortByMagnitudeWithBubbleSortWithCheck(sorted2);
@@ -232,7 +232,7 @@ public class QuakeSortInPlace {
     }
 
     public void testSortByMagnitudeWithCheck() {
-        ArrayList<QuakeEntry> sorted1 = getQuakeData("earthQuakeDataDec6sample2.xml");
+        ArrayList<QuakeEntry> sorted1 = getQuakeData("earthQuakeDataWeekDec6sample1.xml");
 //    	ArrayList<QuakeEntry> sorted2 = getQuakeData("earthquakeDataSampleSix2.atom");
         sortByMagnitudeWithCheck(sorted1);
 //    	sortByMagnitudeWithCheck(sorted2);
@@ -243,9 +243,9 @@ public class QuakeSortInPlace {
         QuakeSortInPlace qs = new QuakeSortInPlace();
         //qs.testSort();
 		//qs.testSortByLargestDepth();
-    	qs.testSortByMagnitudeWithCheck();
+    	//qs.testSortByMagnitudeWithCheck();
     	//qs.testSortByMagnitudeWithBubbleSort();
-        //qs.testSortByMagnitudeWithBubbleSortWithCheck();
+        qs.testSortByMagnitudeWithBubbleSortWithCheck();
 
     }
 }

@@ -2,6 +2,8 @@
 NOT>A new String field is initialized in the constructor.
 NOT>A new String parameter is added to the constructor.
 NOT>A new private variable named priority is created.
+NOT>The toString method is modified to include the new priority as part of the return String.
+The toString method is modified to include a String parameter.
 ====
 2.
 In readFile, the log entries were not stored in records.
@@ -16,7 +18,7 @@ for (LogEntry le : records) {
 4.
 45
 ====
-5.
+5. Run the method uniqueIPVisitsOnDay(“Sep 24”) on the file weblog2_log-->
 8
 ====
 6.
@@ -32,6 +34,8 @@ Run the method countUniqueIPsInRange(400,499)-->23
 9.
 Sep 24
 ====
-10.
+10.sep 30
 [106.220.155.36, 66.67.61.44]
+sep29
+212.128.74.248
 ====
