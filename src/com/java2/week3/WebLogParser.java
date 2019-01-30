@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class WebLogParser {
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.getDefault());
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:confucius.txt Z", Locale.getDefault());
     private static String munchTo(StringBuilder sb, String delim) {
         int x = sb.indexOf(delim);
         if (x == -1) {
