@@ -1,118 +1,98 @@
 package com.java3.week3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 public class EfficientMarkovModel extends AbstractMarkovModel {
 
-    private HashMap<String, ArrayList<String>> map;
+    private int order;
+    private HashMap<String,ArrayList<String>> markovMap;
 
-    public EfficientMarkovModel(int order) {
-        super(order);
-        map = new HashMap<String, ArrayList<String>>();
+    public EfficientMarkovModel(int n) {
+        myRandom = new Random();
+        order = n;
     }
 
-    /**
-     * Get key of order-length starging on index.
-     *
-     * @param index
-     *
-     */
-    private String getKey(int index) {
-        return myText.substring(index, index + order);
+    public void setTraining(String s){
+        myText = s;
+        markovMap = buildMap();
     }
 
-    private String getFollowingLetter(int index) {
-
-        return myText.substring(index+order, index+order+1);
-    }
-
-    @Override
-    public void setTraining(String s) {
-        super.setTraining(s);
-        buildMap();
-        printHashMapInfo();
-    }
-
-    /**
-     * Scan whole teaching text and build map for all possible keys.
-     *
-     * @param key
-     */
-    private void buildMap() {
-
-        for (int i = 0; i < myText.length() - order; i++) {
-
-            String key = getKey(i);
-            String follow = getFollowingLetter(i);
-
-            if (map.containsKey(key)) {
-                map.get(key).add(follow);
+    private HashMap<String,ArrayList<String>> buildMap() {
+        HashMap<String,ArrayList<String>> mappedChars = new HashMap<String,ArrayList<String>>();
+        int placeHolder = 0;
+        while (placeHolder < myText.length()-(order-1)) {
+            String key = myText.substring(placeHolder,placeHolder+order);
+            if (!mappedChars.containsKey(key) && placeHolder + order < myText.length()) {
+                mappedChars.put(key,new ArrayList<String>(Arrays.asList(
+                        myText.substring(placeHolder+key.length(),placeHolder+key.length()+1))));
             }
-            else {
-                ArrayList<String> list = new ArrayList<String>();
-                list.add(follow);
-                map.put(key, list);
+            else if (mappedChars.containsKey(key) && placeHolder + order < myText.length()){
+                ArrayList<String> currentValues = mappedChars.get(key);
+                currentValues.add(myText.substring(placeHolder+key.length(),placeHolder+key.length()+1));
+                mappedChars.replace(key,currentValues);
             }
+            else if (placeHolder + order == myText.length()){
+                mappedChars.put(key, new ArrayList<String>());
+            }
+
+            placeHolder++;
         }
 
+        return mappedChars;
     }
 
     @Override
     public ArrayList<String> getFollows(String key) {
-        return map.get(key);
+        return markovMap.get(key);
     }
 
-    public String getRandomText(int numChars) {
-        if (myText == null) {
-            return "";
+    public void printHashMapInfo() {
+        System.out.println("Key total: "+markovMap.size());
+        int largest = 0;
+        int counter = 0;
+        for (String key: markovMap.keySet()) {
+            //System.out.println("Key number: "+counter+"\tKey text: "+key+"\tKey value: "+markovMap.get(key));
+            if (markovMap.get(key).size() > largest) {
+                largest = markovMap.get(key).size();
+            }
+            counter++;
         }
-        StringBuilder sb = new StringBuilder();
+        System.out.println("Largest value in HashMap: "+largest);
+        ArrayList<String> keysWithMax = new ArrayList<String>();
+        for (String key: markovMap.keySet()) {
+            if (markovMap.get(key).size() == largest) {
+                keysWithMax.add(key);
+            }
+        }
+        System.out.println("Keys with maximum size value: "+keysWithMax);
+    }
 
-        int index = myRandom.nextInt(myText.length() - order);
-        String key = myText.substring(index, index + order);
+    public String getRandomText(int numChars){
+        printHashMapInfo();
+        StringBuilder sb = new StringBuilder();
+        int index = myRandom.nextInt(myText.length()-(order+1));
+        String key = myText.substring(index, index+order);
         sb.append(key);
 
-        for (int k = 0; k < numChars - order; k++) {
-
-            ArrayList<String> follows =getFollows(key);
-
-            if (follows == null) break;
-
-            String followsRandom = follows.get(myRandom.nextInt(follows.size()));
-
-            sb.append(followsRandom);
-            key = key.substring(1) + followsRandom;
-
+        for(int k=0; k < numChars-order; k++){
+            ArrayList<String> follows = getFollows(key);
+            //System.out.println("key "+key+" "+follows);
+            if (follows.size() == 0) {
+                break;
+            }
+            index = myRandom.nextInt(follows.size());
+            String next = follows.get(index);
+            sb.append(next);
+            key = key.substring(1) + next;
         }
 
         return sb.toString();
     }
 
-    public void printHashMapInfo() {
-        System.out.printf("Map size:\t%d\nMax size:\t%d\n", mapSize(), longestFollowsSize());
-//		for (String key : map.keySet()) {
-//			System.out.printf("Key:\t[%s]\tvalues: ", key);
-//			System.out.println(map.get(key));
-//		}
-
-    }
-
-    public int mapSize() {
-        return map.size();
-    }
-
-    public int longestFollowsSize() {
-        int maxSize = 0;
-        for (String key : map.keySet()) {
-            maxSize = Math.max(maxSize, map.get(key).size());
-        }
-
-        return maxSize;
-    }
-
-    @Override
     public String toString() {
-        return "Efficient Markov Model order " + order;
+        return "EfficientMarkovModel of order "+order;
     }
 }

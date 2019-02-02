@@ -83,6 +83,43 @@ public class MarkovRunner {
             printOut(text);
         }
     }
+
+    public void runMarkov() throws IOException {
+        FileReader fr = new FileReader("java3/data/confucius.txt");
+        BufferedReader reader = new BufferedReader(fr);
+        String line = reader.readLine();
+        StringBuilder contentBuilder = new StringBuilder();
+        while ( line != null){
+            contentBuilder.append(line);
+            contentBuilder.append(" ");
+            line = reader.readLine();
+        }
+        String st = contentBuilder.toString();
+        st = st.replace('\n', ' ');
+
+        //String st = "this is a test yes this is really a test yes a test this is wow";
+        int order = 2;
+        int size = 832;
+        int seed = 832;
+        st = st.replace('\n', ' ');
+        //MarkovWordOne markovWord = new MarkovWordOne();
+        MarkovWordTwo markovWord = new MarkovWordTwo();
+        ////MarkovWord markovWord = new MarkovWord(order);
+        //EfficientMarkovWord markovWord = new EfficientMarkovWord(order);
+        runModel(markovWord, st, size, seed);
+
+    }
+
+    public void runModel(IMarkovModel markov, String text, int size, int seed){
+        markov.setTraining(text);
+        markov.setRandom(seed);
+        System.out.println("running with " + markov);
+        for(int k=0; k < 3; k++){
+            String st = markov.getRandomText(size);
+            printOut(st);
+        }
+    }
+
     public void runMarkovEff(String filename) throws IOException {
         FileReader fr = new FileReader("java2/week2/exam2/dnaMystery2.txt");
         BufferedReader reader = new BufferedReader(fr);
@@ -138,10 +175,13 @@ public class MarkovRunner {
         //10. 1549
 //		new MarkovRunner().runMarkovModel("data/week3/romeo.txt");
         //new MarkovRunner().runMarkovEff("data/week3/confucius.txt");
-        MarkovRunner markovRunner = new MarkovRunner();
+        //MarkovRunner markovRunner = new MarkovRunner();
         //markovRunner.runMarkovZero("confucius.txt");
         //markovRunner.runMarkovOne();
         //markovRunner.runMarkovFour();
-        markovRunner.runMarkovModel("aa");
+    //    markovRunner.runMarkovModel("aa");
+        MarkovRunner markovRunner = new MarkovRunner();
+        markovRunner.runMarkov();
+
     }
 }

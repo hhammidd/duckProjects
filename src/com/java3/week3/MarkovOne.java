@@ -3,56 +3,37 @@ package com.java3.week3;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MarkovOne {
-    private String myText;
-    private Random myRandom;
-
+public class MarkovOne extends AbstractMarkovModel{
     public MarkovOne() {
         myRandom = new Random();
     }
 
-    public void setRandom(int seed) {
+    public void setRandom(int seed){
         myRandom = new Random(seed);
     }
 
-    public void setTraining(String s) {
-        myText = s.trim();
+    public String toString(){
+        return "MarkovModel of order 1";
     }
 
-    public ArrayList<String> getFollows(String key) {
-
-        ArrayList<String> follows = new ArrayList<String>();
-
-        for (int i = 0; i < myText.length() - 1; i++) {
-
-            if (key.equals(myText.substring(i, i + 1))){
-                follows.add(myText.substring(i + 1, i + 2));
-            }
-        }
-
-        return follows;
-
-    }
-
-    public String getRandomText(int numChars) {
-        if (myText == null) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        int index = myRandom.nextInt(myText.length() - 1);
-        String key = myText.substring(index, index + 1);
+    public String getRandomText(int numChars){
+        StringBuffer sb = new StringBuffer();
+        //We'll generate a random key from the file provided.
+        int index = myRandom.nextInt(myText.length()-1);
+        String key = myText.substring(index, index+1);
         sb.append(key);
-
-        for (int k = 0; k < numChars - 1; k++) {
+        for(int i=0; i< numChars-1; i++){
             ArrayList<String> follows = getFollows(key);
-            if (follows.size() == 0) {
+            if(follows.size()==0){
                 break;
             }
-            String followsRandom = follows.get(myRandom.nextInt(follows.size()));
-            sb.append(followsRandom);
-            key = followsRandom;
+            index = myRandom.nextInt(follows.size());
+            String next = follows.get(index);
+            sb.append(next);
+            key = next;
         }
-
         return sb.toString();
     }
+
+
 }

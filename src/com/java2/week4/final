@@ -1,0 +1,18 @@
+1.French
+2.La chambre à coucher de Juliette.
+3.German
+4.Drei Hexen treten auf.
+
+
+=====
+5.NOT>There is no key length that ensures an unbreakable Vigenère implementation.
+Half the message length
+======
+6.The language of the original message has multiple letters of comparable high frequency.
+The language of the original message when written in sentences has different letter frequencies than the sum of individual words in the dictionary.
+
+put all >> except>> The language of the original message has an unusual letter that is highest in frequency (not 'e' or 'a').
+
+===
+7.NOT>Neither—the key length compared with the message is unimportant.
+The key length is long compared with the message.

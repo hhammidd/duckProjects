@@ -7,11 +7,9 @@ import java.util.Random;
 public abstract class AbstractMarkovModel implements IMarkovModel {
     protected String myText;
     protected Random myRandom;
-    protected int order;
 
-    public AbstractMarkovModel(int order) {
+    public AbstractMarkovModel() {
         myRandom = new Random();
-        this.order = order;
     }
 
     public void setTraining(String s) {
@@ -19,53 +17,25 @@ public abstract class AbstractMarkovModel implements IMarkovModel {
     }
 
     public void setRandom(int seed) {
-        myRandom.setSeed(seed);
-
-    }
-    /**
-     * Helper function for matching key and a substring <pos, order);
-     * @param key
-     * @param pos
-     * @return
-     */
-    private boolean matchKey(String key, int pos) {
-
-        return key.equals(myText.substring(pos, pos + order));
-
-    }
-
-    /**
-     *Get the letter following key starting on pos:
-     * substring(pos+order, pos+order+1)
-     * @param pos
-     * @return
-     */
-    private String getFollowingLetter(int pos) {
-        // index of letter following key
-        int index = pos+order;
-        return myText.substring(index, index+1);
-    }
-
-    public ArrayList<String> getFollows(String key) {
-
-        ArrayList<String> follows = new ArrayList<String>();
-
-        for (int i = 0; i < myText.length() - order; i++) {
-            // if found key, add letter after the key to the list
-            // key length = order
-            if (matchKey(key, i))
-                follows.add(getFollowingLetter(i));
-        }
-
-        return follows;
-
+        myRandom = new Random(seed);
     }
 
     abstract public String getRandomText(int numChars);
 
-    @Override
-    public String toString() {
-        return "Markov Model order " + order;
+    protected ArrayList<String> getFollows(String key) {
+        ArrayList<String> follows = new ArrayList<String>();
+        int placeHolder = 0;
+        while (placeHolder < myText.length()) {
+            int foundKey = myText.indexOf(key,placeHolder);
+            if (foundKey == -1) {
+                break;
+            }
+            if (foundKey+key.length() >= myText.length()) {
+                break;
+            }
+            follows.add(myText.substring(foundKey+key.length(),foundKey+key.length()+1));
+            placeHolder = foundKey + key.length();
+        }
+        return follows;
     }
-
 }

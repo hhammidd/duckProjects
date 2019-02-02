@@ -1,0 +1,12 @@
+1.
+Add this line in IMarkovModel:
+======
+2.
+private HashMap<String, ArrayList<String>> myMap;
+======
+3.
+41310
+======
+4.
+
+6724
