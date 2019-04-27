@@ -1,0 +1,32 @@
+1.
+2
+====
+2.
+TTA
+====
+3.
+TTA
+====
+4.
+881
+===
+5.
+780
+===
+6.hamlet
+====
+7.
+all check macbeth and romeo
+====
+8.
+if (! wordsUsed.contains(sub)) {
+    wordsUsed.add(sub);
+    break;
+}
+sub = getSubstitute(w.substring(first+1,last));
+====
+9.
+for (String category : myMap.keySet()) {
+===
+10
+An ArrayList of Strings representing the unique categories used.
